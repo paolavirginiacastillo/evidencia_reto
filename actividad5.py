@@ -7,9 +7,9 @@
     - Kenia Esmeralda Ramos Javier - A01799073.
     - Paola Virginia Castillo Moccia - A01784854
 
-""" 
+    Actividad 5. Juego de Memoria
 
-# Actividad 5. Juego de Memoria
+""" 
 from random import *
 from turtle import *
 
@@ -17,7 +17,7 @@ from freegames import path
 
 car = path('car.gif')
 tiles = list(range(32)) * 2
-state = {'mark': None}
+state = {'mark': None,'tap_count':0}
 hide = [True] * 64
 
 
@@ -48,6 +48,7 @@ def tap(x, y):
     """Update mark and hidden tiles based on tap."""
     spot = index(x, y)
     mark = state['mark']
+    state['tap_count'] += 1 #Incrementa el contador.
 
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
@@ -56,6 +57,10 @@ def tap(x, y):
         hide[mark] = False
         state['mark'] = None
 
+    """Verifica que los cuadros(tiles) esten destapados"""
+    if all(not hidden for hidden in hide):
+        print(f"¡Felicidades! Has ganado en: {state['tap_count']} taps!")
+        done()
 
 def draw():
     """Draw image and tiles."""
@@ -78,6 +83,11 @@ def draw():
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
+    """Muestra en la pantalla el contador de taps"""
+    up()
+    goto(-180,180)
+    color('black')
+    write(f'Taps: {state["tap_count"]}',font=('Arial',20,'normal'))
     update()
     ontimer(draw, 100)
 
