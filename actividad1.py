@@ -4,9 +4,8 @@
     Equipo No.
 
     Integrantes:
-    -
-    -
     - Kenia Esmeralda Ramos Javier - A01799073.
+    - Paola Virginia Castillo Moccia - A01784854
 
 """ 
 
@@ -36,15 +35,48 @@ def square(start, end):
 
 def circle(start, end):
     "Draw circle from start to end."
-    pass  # TODO
+    up()
+    goto(start.x, start.y) #vector inicial
+    down()
+    radius = ((end.x - start.x) ** 2 + (end.y - start.y) ** 2) ** 0.5 #radio = distancia puntos de inicio y final
+    begin_fill()
+    turtle.circle(radius)
+    end_fill() #final
 
 def rectangle(start, end):
     "Draw rectangle from start to end."
-    pass  # TODO
+    #ancho y alto = diferencia en coordenadas x y y
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+
+    width = end.x - start.x
+    height = end.y - start.y
+
+    for _ in range(2):
+        forward(abs(width))  # valor absoluto para asegurar que el ancho sea positivo
+        left(90)
+        forward(abs(height)) # valor absoluto para asegurar que la altura sea positiva
+        left(90)
+
+    end_fill()
 
 def triangle(start, end):
     "Draw triangle from start to end."
-    pass  # TODO
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+    # longitud del lado del triángulo
+    side_length = abs(end.x - start.x)  # diferencia
+
+    # dibujo de triángulo
+    for _ in range(3):
+        forward(side_length)
+        left(120)  # ángulo triángulo
+
+    end_fill()
 
 def tap(x, y):
     "Store starting point or draw shape."
@@ -72,10 +104,12 @@ onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
+onkey(lambda: color('orange'), 'o') #añadir naranja como nuevo color
 onkey(lambda: store('shape', line), 'l')
 onkey(lambda: store('shape', square), 's')
 onkey(lambda: store('shape', circle), 'c')
 onkey(lambda: store('shape', rectangle), 'r')
+onkey(lambda: store('shape', triangle), 't')
 onkey(lambda: store('shape', triangle), 't')
 done()
 
