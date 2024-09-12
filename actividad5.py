@@ -85,7 +85,7 @@ def draw():
 
     """Muestra en la pantalla el contador de taps"""
     up()
-    goto(-180,180)
+    goto(-180,210)
     color('black')
     write(f'Taps: {state["tap_count"]}',font=('Arial',20,'normal'))
     update()
@@ -93,7 +93,7 @@ def draw():
 
 
 shuffle(tiles)
-setup(420, 420, 370, 0)
+setup(420, 500, 370, 0)
 addshape(car)
 hideturtle()
 tracer(False)
