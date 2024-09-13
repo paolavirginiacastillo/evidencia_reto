@@ -40,7 +40,7 @@ def circle(start, end):
     down()
     radius = ((end.x - start.x) ** 2 + (end.y - start.y) ** 2) ** 0.5 #radio = distancia puntos de inicio y final
     begin_fill()
-    turtle.circle(radius)
+    circle(radius)
     end_fill() #final
 
 def rectangle(start, end):
