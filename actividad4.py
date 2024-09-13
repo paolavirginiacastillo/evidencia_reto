@@ -26,8 +26,9 @@ def tap(x, y):
     if not inside(ball):
         ball.x = -199
         ball.y = -199
-        speed.x = (x + 200) / 25
-        speed.y = (y + 200) / 25
+        # Aumentos de velocidad
+        speed.x = (x + 200) / 10 
+        speed.y = (y + 200) / 10
 
 
 def inside(xy):
@@ -58,7 +59,7 @@ def move():
         targets.append(target)
 
     for target in targets:
-        target.x -= 0.5
+        target.x -= 9 # Aumento de velocidad
 
     if inside(ball):
         speed.y -= 0.35
@@ -73,11 +74,12 @@ def move():
 
     draw()
 
+    # Reposicionamiento de balones que se salen de la pantalla
     for target in targets:
         if not inside(target):
-            return
+            target.x = 200 # Reposicionamiento-derecha en la pantalla.
 
-    ontimer(move, 50)
+    ontimer(move, 20) # Aumento de la frecuancia de actualización
 
 
 setup(420, 420, 370, 0)
