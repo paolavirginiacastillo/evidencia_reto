@@ -8,37 +8,33 @@ writer = Turtle(visible=False)
 aim = vector(5, 0)  # Dirección inicial de Pacman (derecha)
 pacman = vector(-40, -80)
 
-# Fantasmas con velocidad ajustada
+# Posiciones corregidas de los fantasmas para que aparezcan dentro del laberinto
 ghosts = [
-    [vector(-180, 160), vector(10, 0)],
-    [vector(-180, -160), vector(0, 10)],
-    [vector(100, 160), vector(0, -10)],
-    [vector(100, -160), vector(-10, 0)],
+    [vector(-100, 160), vector(10, 0)],  # Fantasma 1 en la parte superior izquierda
+    [vector(80, 160), vector(0, 10)],   # Fantasma 2 en la parte superior derecha
+    [vector(-60, -60), vector(0, -10)],  # Fantasma 3 en la parte inferior izquierda (dentro del laberinto)
+    [vector(60, 60), vector(-10, 0)],  # Fantasma 4 en la parte inferior derecha (dentro del laberinto)
 ]
 
-# Ajuste al tablero para que sea más completo
+# Nuevo diseño del tablero, más equilibrado
 tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-    0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-    0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0,
-    0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-    0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-    0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0,
-    0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-    0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
-    0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0,
-    0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0,
-    0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+    0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+    0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0,
+    0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+    0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+    0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+    0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+    0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ]
+
 def square(x, y):
     """Dibuja una celda cuadrada usando path en (x, y)."""
     path.up()
@@ -68,17 +64,15 @@ def valid(point):
     """Devuelve True si el punto es válido en el tablero."""
     index = offset(point)
 
-    # Si el índice es None, el punto está fuera del tablero y no es válido
-    if index is None or tiles[index] == 0:
+    if tiles[index] == 0:
         return False
 
     index = offset(point + 19)
 
-    # Verificamos también el desplazamiento para evitar errores de rango
-    if index is None or tiles[index] == 0:
+    if tiles[index] == 0:
         return False
 
-    return True
+    return point.x % 20 == 0 or point.y % 20 == 0
 
 def move_toward_pacman(ghost, pacman):
     """Mueve los fantasmas hacia Pacman solo por caminos válidos."""
@@ -137,6 +131,7 @@ def move():
 
     clear()
 
+    # Pacman se moverá continuamente si hay un camino válido
     if valid(pacman + aim):
         pacman.move(aim)
 
@@ -156,12 +151,17 @@ def move():
     for point, course in ghosts:
         # Mover fantasmas hacia Pacman solo por caminos válidos
         best_move = move_toward_pacman(point, pacman)
+        if valid(point + course):
+            point.move(course)
         if best_move:
             course.x = best_move.x
             course.y = best_move.y
-
-        if valid(point + course):
-            point.move(course)
+        else:
+            options = [
+                vector(5, 0),
+                vector(-5, 0),
+                vector(0, 5),
+                vector(0, -5),]
 
         up()
         goto(point.x + 10, point.y + 10)
