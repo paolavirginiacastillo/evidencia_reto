@@ -5,18 +5,18 @@ from freegames import floor, vector
 state = {'score': 0}
 path = Turtle(visible=False)
 writer = Turtle(visible=False)
-aim = vector(5, 0)  # Dirección inicial de Pacman (derecha)
+aim = vector(5, 0) 
 pacman = vector(-40, -80)
 
 # Posiciones corregidas de los fantasmas para que aparezcan dentro del laberinto
 ghosts = [
     [vector(-100, 160), vector(10, 0)],  # Fantasma 1 en la parte superior izquierda
     [vector(80, 160), vector(0, 10)],   # Fantasma 2 en la parte superior derecha
-    [vector(-60, -60), vector(0, -10)],  # Fantasma 3 en la parte inferior izquierda (dentro del laberinto)
-    [vector(60, 60), vector(-10, 0)],  # Fantasma 4 en la parte inferior derecha (dentro del laberinto)
+    [vector(-60, -60), vector(0, -10)],  # Fantasma 3 en la parte inferior izquierda
+    [vector(60, 60), vector(-10, 0)],  # Fantasma 4 en la parte inferior derecha
 ]
 
-# Nuevo diseño del tablero, más equilibrado
+# Nuevo diseño del tablero
 tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
