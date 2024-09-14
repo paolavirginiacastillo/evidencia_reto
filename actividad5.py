@@ -79,7 +79,7 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        goto(x + 2, y +2) #Centrar los dígitos
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
@@ -100,7 +100,8 @@ tracer(False)
 onscreenclick(tap)
 draw()
 done()
-
+"""4.- Como un condimento de innovación al juego, Podrías utilizar algo diferente a los dígitos para resolver el juego y que al usuario le ayude a tener mejor memoria ?
+    Sí, sería más didactico que fueran una especie de imagenes algo llamativos o iconos que ayuden a hacerlo más visual, porque el blanco de las tarjetas y el color de los numeros (en mi opinion fastidia la vista)"""
 """
     Referencias de código implementados:
     5.-https://grantjenks.com/docs/freegames/memory.html
